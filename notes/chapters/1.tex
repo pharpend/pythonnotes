@@ -5,10 +5,43 @@ just getting set up. The second lecture is toying around with the
 Read/Eval/Print Loop (REPL). The third lecture writing our first
 actual Python program.
 
-Throughout these notes, many references will be made to the CodingBat
-problems: \url{http://codingbat.com/python}.
+Throughout this text, many references will be made to the CodingBat
+problems: \url{http://codingbat.com/python}. It's very important that
+you manually type in and personally test every piece of code that you
+see here. Do not skim the book, and do not copy \& paste the code
+examples. Manually type them out. It really helps with understanding
+the material.
+
+\subsection{Conventions used in the book}
+
+If you see \code{monospaced text}, it refers to a URL or code. If you
+are reading this as a PDF, you can click on URLs, footnotes,
+bibliography citations, etc, and your PDF reader will take you to the
+appropriate place. Long blocks of monospace text will have their own
+fancy box with line numbering:
+
+\begin{lstlisting}[language=Python]
+"Hi, I'm a string inside a code block."
+\end{lstlisting}
+
+Many of the code blocks have syntax highlighting. The highlighting
+doesn't really mean anything, it's just there to help with
+readability. 
+
+If you see a bunch of code preceded by a \code{%} or a \code{$}, then
+  you're supposed to run the stuff afterward in a terminal. There may
+  be following lines to indicate the expected result.
+
+\begin{lstlisting}
+% uname -a
+Linux tsarina 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt25-2 (2016-04-08) x86_64 GNU/Linux
+\end{lstlisting}
+
+If you see a bunch of monospace text preceded by a 
 
 \section{Setup}
+
+\subsection{Installing Python}
 
 In this section, we're going to get Python installed on your system,
 and run the famous \code{hello, world} program. The setup varies by
@@ -19,25 +52,7 @@ operating system.
 Navigate yourself over to \url{https://www.python.org/downloads/}, and
 download \& install the latest version of Python 3.
 
-Then, open up your start menu, and find a program called IDLE. Open
-that. You should see a bunch of garbage telling you the Python
-version, what operating system, etc. Then, you'll see three ``greater
-than'' signs, followed by a space. I'm on Linux, so my thing will be a
-bit different. However, here's what it looks like on my system.
-
-\begin{lstlisting}
-Python 3.4.2 (default, Oct  8 2014, 10:45:20) 
-[GCC 4.9.1] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> 
-\end{lstlisting}
-
-The \code{hello, world} program is a program that's featured in pretty
-much every programming text. The program literally prints out
-\code{hello, world} in the terminal console when you run
-it.\footnote{I believe the program first appeared in the classic book
-  \fullcite{k-and-r}.} We'll write an actual program later. However,
-for now, we'll just have the REPL do something similar.
+\paragraph{Unix}
 
 If you are on Linux, BSD, or a Macintosh, you likely already have
 Python installed. We'll be using Python 3. Open up a terminal, and run
@@ -61,14 +76,42 @@ Python 3.4.2
 If not, consult your operating system's documentation for installing
 Python.
 
-\subsection{Hello World}
+\subsection{Text editor}
 
-Now that we have Python installed, open up a terminal, and run the
-appropriate command (either \code{python} or \code{python3}), and type
-in the following line:
+You'll also want a text editor.
 
+\begin{enumerate}
+\item For the purposes of this text, Kate
+  (\url{https://kate-editor.org/}) is my recommendation, because it's
+  fancy, easy-to-use, and it's easily installable on every operating
+  system.
+\item I personally use GNU Emacs
+  (\url{https://www.gnu.org/software/emacs/}). However, it's quite
+  difficult to set up, and doing so is well outside the scope of this
+  text.
+\item Vim (\url{http://www.vim.org/}) is a very popular editor, and is
+  very nice. It's a bit easier to use and set up than Emacs. However,
+  it's still miles behind Kate.
+\end{enumerate}
 
+\subsection{Hello world}
 
+The \code{hello, world} program is a program that's featured in pretty
+much every programming text. The program literally prints out
+\code{hello, world} in the terminal console when you run
+it.\footnote{I believe the program first appeared in the classic book
+  \emph{The C Programming Language}, by Kernighan \& Richie. A full
+  citation can be found in the bibliography. \cite{k-and-r}} We'll
+write an actual program later. However, for now, we'll just have the
+REPL do something similar to what the program will hypothetically do.
+
+\begin{lstlisting}
+>>> print('hello, world')
+hello, world
+\end{lstlisting}
+
+The \code{>>>} indicates that you should manually type in whatever
+follows the \code{>>>}. Boom, we're done!
 
 \section{Toying around in the REPL}
 

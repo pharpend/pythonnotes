@@ -1,20 +1,19 @@
 \documentclass[12pt,letterpaper,oneside]{memoir}
 
 \usepackage[date=iso8601,urldate=iso8601]{biblatex}
+
 \usepackage{color}
 \usepackage{datetime}
 \usepackage{listings}
 \usepackage{url}
 
-\usepackage{newtxtt}
+% \usepackage{newtxtext}
+% \usepackage{newtxmath}
+\usepackage{beramono}
 \usepackage[T1]{fontenc}
 
 \usepackage{hyperref}
 \usepackage{cleveref}
-
-\addbibresource{notes.bib}
-\yyyymmdddate
-\renewcommand*{\dateseparator}{-}
 
 \definecolor{mygreen}{rgb}{0.3,0.6,0.3}
 \definecolor{mygray}{rgb}{0.8,0.8,0.8}
@@ -32,7 +31,7 @@
   frame=single,                    % adds a frame around the code
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
   keywordstyle=\bfseries,       % keyword style
-  language=Python,                % the language of the code
+  % language=\null,                % the language of the code
   % morekeywords={*,...},            % if you want to add more keywords to the set
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                   % how far the line-numbers are from the code
@@ -49,8 +48,16 @@
   caption=\lstname ,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
+\yyyymmdddate
+\renewcommand*{\dateseparator}{-}
+\addbibresource{python-notes.bib}
+
 \newcommand{\term}{\textbf}
 \newcommand{\code}{\lstinline}
+
+% \newenvironment{pyblock}
+%   {\begin{lstlisting}[language=Python]}
+%   {\end{lstlisting}}
 
 \begin{document}
 \title{Python Notes}
