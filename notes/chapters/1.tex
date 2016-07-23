@@ -1,0 +1,77 @@
+\chapter{Introduction}
+
+Hello, these are lecture notes for Python. The first ``lecture'' is
+just getting set up. The second lecture is toying around with the
+Read/Eval/Print Loop (REPL). The third lecture writing our first
+actual Python program.
+
+Throughout these notes, many references will be made to the CodingBat
+problems: \url{http://codingbat.com/python}.
+
+\section{Setup}
+
+In this section, we're going to get Python installed on your system,
+and run the famous \code{hello, world} program. The setup varies by
+operating system.
+
+\paragraph{Windows}
+
+Navigate yourself over to \url{https://www.python.org/downloads/}, and
+download \& install the latest version of Python 3.
+
+Then, open up your start menu, and find a program called IDLE. Open
+that. You should see a bunch of garbage telling you the Python
+version, what operating system, etc. Then, you'll see three ``greater
+than'' signs, followed by a space. I'm on Linux, so my thing will be a
+bit different. However, here's what it looks like on my system.
+
+\begin{lstlisting}
+Python 3.4.2 (default, Oct  8 2014, 10:45:20) 
+[GCC 4.9.1] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+\end{lstlisting}
+
+The \code{hello, world} program is a program that's featured in pretty
+much every programming text. The program literally prints out
+\code{hello, world} in the terminal console when you run
+it.\footnote{I believe the program first appeared in the classic book
+  \fullcite{k-and-r}.} We'll write an actual program later. However,
+for now, we'll just have the REPL do something similar.
+
+If you are on Linux, BSD, or a Macintosh, you likely already have
+Python installed. We'll be using Python 3. Open up a terminal, and run
+\code{python --version}. On my system (Debian 8.5):
+
+\begin{lstlisting}
+% python --version
+Python 2.7.9
+\end{lstlisting}
+
+Oh, by the way, a line preceded with a \code{%} sign indicates that
+the line should be entered into a terminal. Anyway, proceeding. On my
+system, Python 2 is the default. However, the command \code{python3}
+exists, and upon running \code{python3 --version}, I get
+
+\begin{lstlisting}
+% python3 --version
+Python 3.4.2
+\end{lstlisting}
+
+If not, consult your operating system's documentation for installing
+Python.
+
+\subsection{Hello World}
+
+Now that we have Python installed, open up a terminal, and run the
+appropriate command (either \code{python} or \code{python3}), and type
+in the following line:
+
+
+
+
+\section{Toying around in the REPL}
+
+\term{REPL} stands for Read/Evaluate/Print Loop. In a little while,
+we'll learn what all of those words mean. For now, just know that it's
+the interactive console thing that 
