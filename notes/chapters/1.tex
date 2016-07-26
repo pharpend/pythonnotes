@@ -8,9 +8,9 @@ actual Python program.
 Throughout this text, many references will be made to the CodingBat
 problems: \url{http://codingbat.com/python}. It's very important that
 you manually type in and personally test every piece of code that you
-see here. Do not skim the book, and do not copy \& paste the code
-examples. Manually type them out. It really helps with understanding
-the material.
+see here. \textbf{Do not skim the book, and do not copy \& paste the
+  code examples. Manually type them out.} It really helps with
+understanding the material.
 
 \subsection{Conventions used in the book}
 
@@ -28,18 +28,132 @@ Many of the code blocks have syntax highlighting. The highlighting
 doesn't really mean anything, it's just there to help with
 readability. 
 
-If you see a bunch of code preceded by a \code{%} or a \code{$}, then
-  you're supposed to run the stuff afterward in a terminal. There may
-  be following lines to indicate the expected result.
+If you see a bunch of stuff preceded by a
+dollar sign, then you're supposed to run the stuff afterward in a
+terminal. There may be following lines to indicate the expected
+result. Do not type in the dollar sign.
 
-\begin{lstlisting}
-% uname -a
-Linux tsarina 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt25-2 (2016-04-08) x86_64 GNU/Linux
-\end{lstlisting}
+\lstinputlisting{listings/uname-a.txt}
 
-If you see a bunch of monospace text preceded by a 
+If you see a bunch of monospace text preceded by a \code{>>>}, then
+you are supposed to run that in the interactive Python console. I'll
+explain what that is in a second.
+
+\subsection{Mathematical notation}
+
+I'm a mathematician, so I tend to think of---and state
+things---mathematically. Therefore, I'm going to introduce some basic
+mathematical notation so that you will have some idea of what I'm
+talking about.
+
+\begin{definition}
+  A \term{set} is an collection of objects, which are called
+  \term{elements}. \cite{taylor-fnds}
+\end{definition}
+
+Given a set $A$, to say \ctext{$x$ is an element of $A$,} we write
+$$x \in A.$$ Alternatively, you can just read $x \in A$ as ``$x$ in
+$A$'' If \ctext{$x$ is not an element of $A$,} we write
+$$x \notin A.$$ Sometimes, I'll use the shorthand $$x, y \in A,$$
+because I'm too lazy to type out \ctext{$x \in A$ and $y \in A$.}
+
+For sufficiently small sets, the typical way to define them is to list
+their elements between curly braces. For instance,
+\ctext{$\mset{1,2,3}$ is a set.} Order and duplication do not matter, so
+$$\mset{1,2,3,1,1,2,3,2,3,1,1}$$ and $$\mset{2,1,3}$$ are both the same
+set. We then have $$1 \in \mset{1,2,3},$$ but
+$$4 \notin \mset{1,2,3}.$$
+
+\begin{definition}
+  The number of elements in a set is called the \term{cardinality} of
+  the set. Given a set $A$, the cardinality of $A$ is denoted
+  $\abs{A}$.
+\end{definition}
+
+For instance, \ctext{if $A = \mset{1,2,3},$ then $\abs{A} = 3.$} For
+\ctext{$B = \mset{1,2,3,4,5,6},$ $\abs{B} = 6$.}
+
+\begin{definition}
+  A set $A$ is a \term{subset} of $B$, denoted $$A \subof B,$$ if
+  every element of $A$ is also an element of $B$. That is, \ctext{for
+    all $x \in A$, $x \in B$.}
+\end{definition}
+
+For instance, $$\mset{1,2,4} \subof \mset{1,2,3,4,5}.$$
+
+\begin{definition}
+  Two sets $A$ and $B$ are equal, written $A = B$, if
+  \ctext{$A \subof B$, and $B \subof A$.}
+\end{definition}
+
+\begin{remark}
+  The definition I gave is for \term{improper subsets}. That is,
+  $A \subof B$ allows the possibility that $A = B$. The term
+  \term{proper subset} refers to a subset that is strictly
+  smaller. That is, \ctext{$A$ is a proper subset of $B$,} written
+  $$A \psubof B,$$ if $A \subof B$, and there is some element
+  $x \in B$ such that $x \notin A$.
+
+  The notion of improper subsets turns out to be a lot more useful,
+  and comes up a lot more. Therefore, when I say ``is a subset of'', I
+  am referring to the notion of improper subsets.
+
+  Some people use the notation $A \subset B$ to refer to proper
+  subsets, and some use it to refer to improper subsets. It's
+  therefore ambiguous notation, so I'm going to avoid using it.
+\end{remark}
+
+\begin{definition}
+  The \term{difference} of two sets $A$ and $B$ is defined as
+  $$A \setminus B = \scomp{x}{x \in A \text{, but } x \notin B}.$$
+\end{definition}
+
+If you aren't familiar with that notation: the $:$ should be read as
+``such that''. The whole thing is therefore \ctext{the set of all $x$
+  such that $x$ is in $A$, but $x$ is not in $B$.} It's called a
+\term{set comprehension}. Later on, we'll explore \term{list
+  comprehensions} in Python, which are similar.
+
+Georg Cantor was the mathematician largely responsible for modern set
+theory. One of his main results was in the development of
+\term{infinite sets}, particularly in properties of the cardinalities
+thereof. There are a lot of weird and downright counterintuitive
+properties of the cardinalities of infinite sets. Said properties are
+largely outside the scope of this book, but I'll mention a few as we
+go along. For now, here are a few sets which we will use:
+
+\begin{enumerate}
+\item The \term{natural numbers}, denoted $\N$, are $$\N = \mset{1, 2,
+  3, 4, \dots}.$$ Some people use $0$ as the first natural number. It
+doesn't matter a whole lot.
+\item The \term{integers}, denoted $\Z$ (for the German ``zahlen''),
+  are $$\Z = \mset{0, \pm 1, \pm 2, \pm 3, \pm 4, \dots}.$$
+\item The \term{quotient numbers}, also called (\term{rational
+    numbers}\footnote{The term ``rational'' means ``of or relating to
+    a ratio''. Although, the rational numbers do behave much more
+    reasonably than their complement, the \term{irrational
+      numbers}. (I know, I know\dots)}, or \term{fractions}) denoted
+  $\Q$, are the set of all fractions of two integers (where the
+  denominator is nonzero):
+  $$\Q = \scomp{\frac{x}{y}}{x \in \Z, y \in \Z \setminus \mset{0}}.$$
+\item The \term{real numbers}, denoted $\R$, are any conceivable number. For
+  instance, the square root of $2$ is not a rational number, but is a
+  real number. We'll prove this later on.
+\item There are some weird holes in the real numbers, too. For
+  instance, the square root of $-1$ is not a real number. Therefore,
+  we have the complex numbers $\C$. Let $i = \sqrt{-1}$. Then, $$\C =
+  \scomp{a + bi}{a, b \in \R}.$$
+\end{enumerate}
+
+I won't dive too far into rigorously defining these numbers. Mostly
+because it's surprisingly difficult and not very interesting. If you
+would like to learn more about them, I invite you to read
+\cite{landau-fnds}, and perhaps \cite{flanigan-complex-vars}, if
+you're interested in the complex numbers.
 
 \section{Setup}
+
+Okay, getting back to reality:
 
 \subsection{Installing Python}
 
@@ -50,31 +164,40 @@ operating system.
 \paragraph{Windows}
 
 Navigate yourself over to \url{https://www.python.org/downloads/}, and
-download \& install the latest version of Python 3.
+download \& install the latest version of Python 3. 
 
 \paragraph{Unix}
 
 If you are on Linux, BSD, or a Macintosh, you likely already have
 Python installed. We'll be using Python 3. Open up a terminal, and run
-\code{python --version}. On my system (Debian 8.5):
+\code{python --version}. On my system (Fedora 24):
 
-\begin{lstlisting}
-% python --version
-Python 2.7.9
-\end{lstlisting}
+\lstinputlisting{listings/python2version.txt}
 
-Oh, by the way, a line preceded with a \code{%} sign indicates that
-the line should be entered into a terminal. Anyway, proceeding. On my
-system, Python 2 is the default. However, the command \code{python3}
-exists, and upon running \code{python3 --version}, I get
+Anyway, proceeding. On my system, Python 2 is the default. However, on
+your system, Python 3 might be the default.
 
-\begin{lstlisting}
-% python3 --version
-Python 3.4.2
-\end{lstlisting}
+\lstinputlisting{listings/python3version.txt}
 
-If not, consult your operating system's documentation for installing
-Python.
+If, when you run \code{python --version}, the version starts with
+\code{3}, then you can just run the \code{python} command when I tell
+you to ``use the appropriate Python command,'' or something. If the
+default version of Python is 2.something, then run \code{python3} to
+get at Python.
+
+If Python is not installed, consult your operating system's
+documentation for installing Python. It's installed by default on
+every single operating system I've used, except Windows.
+
+\paragraph{For everyone}
+
+When I say ``open the Python REPL'', I now mean ``open a terminal, and
+run the appropriate Python command'' (whichever one gives you a
+version of Python 3). Note, if you just run the plain \code{python}
+(or \code{python3}) command, you get a nice \term{Read/Eval/Print
+  Loop} (REPL):
+
+\lstinputlisting{listings/python3repl.txt}
 
 \subsection{Text editor}
 
@@ -91,7 +214,7 @@ You'll also want a text editor.
   text.
 \item Vim (\url{http://www.vim.org/}) is a very popular editor, and is
   very nice. It's a bit easier to use and set up than Emacs. However,
-  it's still miles behind Kate.
+  it's still miles behind Kate, as far as ease-of-use is concerned.
 \end{enumerate}
 
 \subsection{Hello world}
@@ -100,21 +223,443 @@ The \code{hello, world} program is a program that's featured in pretty
 much every programming text. The program literally prints out
 \code{hello, world} in the terminal console when you run
 it.\footnote{I believe the program first appeared in the classic book
-  \emph{The C Programming Language}, by Kernighan \& Richie. A full
-  citation can be found in the bibliography. \cite{k-and-r}} We'll
-write an actual program later. However, for now, we'll just have the
-REPL do something similar to what the program will hypothetically do.
+  \fullcite{k-and-r}, commonly referred to as ``K\&R.''} We'll write
+an actual program later. However, for now, we'll just have the REPL do
+something similar to what the program will hypothetically do.
 
 \begin{lstlisting}
 >>> print('hello, world')
 hello, world
 \end{lstlisting}
 
-The \code{>>>} indicates that you should manually type in whatever
-follows the \code{>>>}. Boom, we're done!
+Boom, we're done!
 
 \section{Toying around in the REPL}
 
 \term{REPL} stands for Read/Evaluate/Print Loop. In a little while,
 we'll learn what all of those words mean. For now, just know that it's
-the interactive console thing that 
+the interactive console thing that we used to write a program called
+``hello world''.
+
+\paragraph{Python as a calculator}
+
+The four elementary operations operate as you would expect in Python
+3.
+
+\begin{lstlisting}
+>>> 2 + 2
+4
+>>> 23 + 2 + 13
+38
+>>> 428 / 4
+107.0
+>>> 84/14
+6.0
+\end{lstlisting}
+
+\paragraph{Integer division} Python 2 uses ``integer division'', which
+is, instead of allowing something like $\frac{2}{3}$ to be a quotient,
+it insists that the result is an integer. Therefore, when you compute
+\code{x / y} in Python 2, instead of $\frac{x}{y}$ as you would
+normally think of it, Python 2 instead computes the floor of the
+fraction.   Examples:
+
+\begin{definition}
+  Given two numbers $x, y \in \Z$, with $y \ne 0$, we say \ctext{$y$
+    divides $x$} if there is some $c \in \Z$ such that $cy = x.$
+\end{definition}
+
+\begin{remark}
+  All of the following statements are equivalent:
+
+  \begin{enumerate}
+  \item $x$ divides $y$,
+  \item $y$ is divisible by $x$,
+  \item $x$ is a factor of $y$,
+  \item $\frac{x}{y}$ is an integer.
+  \end{enumerate}
+\end{remark}
+
+\begin{definition}
+  The \term{floor} of a number $x \in \R$, denoted $\floor{x}$ is
+  defined as the greatest integer $y$ such that $y \le x$.
+\end{definition}
+
+Python 2 uses \term{floor division}, or \term{integer division}. Examples:
+
+\begin{lstlisting}
+% python2
+Python 2.7.12 (default, Jul 18 2016, 10:55:51) 
+[GCC 6.1.1 20160621 (Red Hat 6.1.1-3)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 2/3
+0
+>>> -2/3
+-1
+>>> 4/3
+1
+>>> -4/3
+-2
+\end{lstlisting}
+
+If $y \divides x$, then $\frac{x}{y}$ is an integer, so therefore
+floor division works like normal division:
+
+\begin{lstlisting}
+>>> 10 / 5
+2
+>>> 24 / 6
+4
+\end{lstlisting}
+
+We'll be using Python 3, which has sane division. However, it's worth
+noting that Python 2 (and most programming languages) use floor
+division. It's also a nice segue into introducing a feature in
+Python. You can import features from future versions of Python. For
+instance, to import sane division into Python 2, you can run
+
+\begin{lstlisting}
+>>> from __future__ import division
+>>> 2 / 3
+0.6666666666666666
+\end{lstlisting}
+
+\begin{remark}
+  Note that there are a finite number of digits at the end. A
+  recurring problem in computer science is \term{floating-point
+    approximations}. Where, you have some ``pure'' mathematical value
+  that you have to represent numerically. With some of them, like
+  $\frac{1}{4} = 0.25,$ the numerical representation terminates. With
+  others, like $\frac{1}{3} = 0.333\dots,$ the numerical
+  representation does not terminate, but instead follows an obvious
+  pattern.
+
+  With irrational numbers (real numbers that are not quotients), the
+  numerical representation does not follow any pattern, and never
+  terminates. Examples of irrational numbers include
+  Euler's\footnote{Euler is pronounced ``oiler.''} constant
+  $e \approx 2.7182818$, and $\pi \approx 3.141592654$, which is the
+  ratio of the circumference of a circle to its diameter. 
+
+  It's even difficult to represent terminating rational numbers
+  accurately. For instance:
+
+\begin{lstlisting}
+>>> 0.1 + 0.2
+0.30000000000000004
+\end{lstlisting}
+
+  There are many cases where you need to be smarter than the
+  computer. This is one of them.
+\end{remark}
+
+You should note, that in Python 3, if you compute \code{x / y}, even
+if $y \divides x$, the result will be a ``floating-point'' number,
+meaning it has a decimal point.
+
+\begin{lstlisting}
+>>> 42 / 7
+6.0
+>>> 45 / 9
+5.0
+\end{lstlisting}
+
+The difference between an integer and a floating-point number is what
+is known as a \term{type}. Types in programming are \emph{almost} the
+same thing as sets in math. To find the type of something, you can
+call the function \code{type()}:
+
+\begin{lstlisting}
+>>> type(5)
+<class 'int'>
+>>> type(5.0)
+<class 'float>
+>>> type(1 / 3)
+<class 'float'>
+>>> type(3 / 1)
+<class 'float'>
+\end{lstlisting}
+
+Note that, even in Python 2, to compute $\frac{2}{3}$ using floating
+division, you can just compute \code{2.0 / 3}, the result of which is
+a \code{float}.
+
+\subsection{Strings}
+
+\term{String} is the programming term for text. In Python, strings are
+denoted by either single or double quotes. It doesn't matter a whole
+lot. I like single quotes better, so I'll try to use them.
+
+\begin{lstlisting}
+>>> 'The quick brown fox jumped over the lazy dog'
+'The quick brown fox jumped over the lazy dog'
+>>> "The quick brown fox jumped over the lazy dog"
+'The quick brown fox jumped over the lazy dog'
+\end{lstlisting}
+
+The difference becomes apparent if your string contains either single
+quotes or double quotes inside the string. For instance:
+
+\begin{lstlisting}
+>>> "Don't tread on me"
+"Don't tread on me"
+>>> 'Don't tread on me'
+  File "<stdin>", line 1
+    'Don't tread on me'
+         ^
+SyntaxError: invalid syntax
+\end{lstlisting}
+
+This is because Python interprets the apostrophe in \code{Don't} as
+the end of the string, and then gets confused when there's a bunch of
+garbage afterward. You can still insert an apostrophe into a
+single-quoted string by putting a backslash before it:
+
+\begin{lstlisting}
+>>> 'Don\'t tread on me'
+"Don't tread on me"
+\end{lstlisting}
+
+You can add two strings together:
+
+\begin{lstlisting}
+>>> 'hello' + ' ' + 'world'
+'hello world'
+\end{lstlisting}
+
+You can even multiply a string times a number $n \in \Z$ to repeat the
+string $n$ times. 
+
+\begin{lstlisting}
+>>> 'hello' * 5
+'hellohellohellohellohello'
+>>> 'hello' * 1
+'hello'
+\end{lstlisting}
+
+What do you think happens if you multiply the string by $0$? What
+about a negative integer? What about a floating-point number? Try it
+and see!
+
+\subsection{Booleans}
+
+The other important type (for now) is \term{Booleans}, named after the
+English mathematician George Boole. A Boolean is either \code{True} or
+\code{False}. They are useful in testing things in programming.
+
+\begin{lstlisting}
+>>> 3 > 2
+True
+>>> 2 > 3
+False
+\end{lstlisting}
+
+There are six numerical Boolean operators that we'll use:
+
+
+\begin{center}
+  \begin{tabu} to \textwidth {c|c}
+    \textbf{Math} & \textbf{Python} \\
+    \tabucline \\
+    $x < y$ & \code{x < y} \\
+    $x \le y$ & \code{x <= y} \\
+    $x > y$ & \code{x > y} \\
+    $x \ge y$ & \code{x >= y} \\
+    $x = y$ & \code{x == y} \\
+    $x \ne y$ & \code{x != y} \\
+  \end{tabu}
+\end{center}
+Note, that, in computing, there's an important difference between a
+definition $x = y$ (defining $x$ to be equal to $y$), and testing
+whether or not $x = y$. In Python, to \emph{define} $x = y$, you write
+\code{x = y}. To \emph{test} whether or not $x = y$, you write \code{x == y}.
+
+Also, note that some of the operators apply to things other than
+numbers. For instance, we can decide whether or not two strings are
+equal:
+
+\begin{lstlisting}
+>>> 'hello' == 'hello'
+True
+>>> 'hello' == 'world'
+False
+\end{lstlisting}
+
+We have three main operations on Booleans:
+
+\begin{enumerate}
+\item \term{Negation}. This is where you just take the opposite of the
+  Boolean's value. In mathematical notation, this is $\lnot
+  a$. However in Python, it's just \code{not a}.
+
+\begin{lstlisting}
+>>> not True
+False
+>>> not False
+True
+>>> not ('hello' == 'world')
+True
+\end{lstlisting}
+
+\item \term{Logical-and}. $a \land b$---or \code{a and b} in
+  Python---is true if and only if $a$ and $b$ are both true.
+
+\begin{lstlisting}
+>>> True and True
+True
+>>> True and False
+False
+>>> False and True
+False
+>>> False and False
+False
+\end{lstlisting}
+
+\item \term{Logical-or}. $a \lor b$---or \code{a or b} in Python---is
+  true if either $a$ or $b$ is true, or if both are true. This runs
+  contrary to our normal semantic definition of ``or'', where either
+  $a$ or $b$ can be true, but not both.
+
+\begin{lstlisting}
+>>> True or True
+True
+>>> True or False
+True
+>>> False or True
+True
+>>> False or False
+False
+\end{lstlisting}
+\end{enumerate}
+
+Don't worry if you don't completely understand, just keep
+moving. You'll get all of this later.  Here are a number of properties
+that I'm going to state without proving them. You should convince
+yourself that they're true. At the end of the chapter, we'll ``prove''
+it, simply by writing a program that does the computation for every
+value of $a$ and $b$ (and $c$ for the associative laws).
+
+\begin{enumerate}
+\item \code{not (not a) == a}. This is called \term{double negation}.
+\item \code{a and (b and c) == (a and b) and c}. This is the
+  \term{associative property}
+\item \code{a and b == b and a}. This is the \term{commutative
+    property}.
+\item \code{a and True == a}. This is the \term{conjunctive identity}.
+\item \code{a or (b or c) == (a or b) or c}. This is the
+  \term{associative property}
+\item \code{a or b == b or a}. This is the \term{commutative
+    property}.
+\item \code{a or False == a}. This is the \term{disjunctive identity}.
+\item \code{a and (b or c) == (a and b) or (a and c)}. This is the
+  \term{distributive property}.
+\item \code{a or (b and c) == (a or b) and (a or c)}. This is another
+  \term{distributive property}.
+\item \code{not (a and b) == (not a) or (not b)}. This is one of
+  \term{De Morgan's laws}.
+\item \code{not (a or b) == (not a) and (not b)}. This is the other of
+  De Morgan's laws.
+\end{enumerate}
+
+\section{Doing things in files}
+
+We're now to the point where we can actually write a program in a
+file, and run the program from the command line. I would suggest
+making a directory for your Python programs, because we'll be writing
+a lot of them.
+
+Open your favorite text editor (you \emph{did} install one earlier,
+like I told you, right?), and create a file called \code{hello.py} in
+the directory that you created.
+
+Here's the hello world program:
+
+\pyfile{code/hello.py}
+
+The \code{#} is used to indicate a \term{comment}, which is a line
+that will be ignored by the Python interpreter. It's used to leave
+notes for yourself and other programmers reading your code. You should
+get in the habit of describing your program at the top of every
+file. It's not required, but it's a good practice. The colors don't
+particularly mean anything, they're just there to help with
+readability.
+
+\subsection{Running on the command line}
+
+I have positively no idea how to do this in Windows. I've used Unix my
+whole life, so I will explain how to do it in Unix. More importantly,
+I don't own a machine running Windows. Hopefully, you can figure stuff
+out in Windows.
+
+\paragraph{Quick command line tutorial}
+
+As I've mentioned, the dollar sign preceding a line indicates you're
+supposed to type the rest of the line in to a terminal. There are four
+main commands you need to know:
+
+\begin{enumerate}
+\item \code{cd}, which stands for ``change directory.'' It will change
+  the current directory in which you are running terminal commands.
+\item \code{ls}, which stands for ``list.'' It will list the contents
+  of the current directory.
+\item \code{pwd}, which stands for ``print working directory.'' It
+  will show you the directory you are in.
+\item \code{man} pulls up the manual for a program.
+\end{enumerate}
+
+Here's a sample, on my machine. Don't type this stuff in, because it
+probably won't work on \emph{your} machine. I'm just trying to show an
+example of how one might use the command line.
+
+\lstinputlisting{listings/cmdline-tutorial.txt}
+
+You can run \code{man pwd} to view the manual for \code{pwd},
+\code{man cd} to view the manual for \code{cd}, \dots, you get the
+point. Almost every command has a manual. In the \code{man} interface,
+you can use the arrow keys to scroll, and hit \code{q} to exit.
+
+\paragraph{Back to Python}
+
+Now that you know basic command-line navigation, \code{cd} into the
+directory where you are storing your code. In my case it's
+\code{/home/pharpend/src/pythonnotes/notes/code}. To run the code, run
+
+\lstin{python3hello.txt}
+
+Cool. Let's write a less trivial program. First things first, I need
+to explain \term{functions}. In mathematics, a \term{function} is a
+construct that takes some input, and produces some output. Critically,
+if you give a function the same input, you should get the same
+output. That is, \ctext{if $x = y$, then $f(x) = f(y)$.} (That
+property is called \term{referential transparency}.)
+
+\textbf{However}: Python bastardizes the term ``function'' to refer to
+anything that takes input and produces output, regardless of whether
+or not the ``function'' is referentially transparent. For instance,
+Python calls this a function:
+
+\lstin{randint-function.txt}
+
+It is clearly \textbf{not} a function, as far as mathematics is
+concerned. However, the basic idea is the same. There are some
+languages that rely heavily on the use of actual mathematical
+functions. Those languages are called \term{functional}
+languages. Examples of functional languages are Haskell, Idris, and
+OCaml.
+
+In mathematics, a function \ctext{$f : X \to Y$, where $X$ and $Y$ are
+  sets,} takes elements from $X$ and maps them to elements in $Y$. In
+some programming languages, it's helpful to think of ``functions'' as
+maps from elements of one type to elements of another type. The
+elements can of course be the same type. Consider this function:
+
+\begin{align*}
+  f & : \Z \to \Z \\
+  f(x) & = x + 2
+\end{align*}
+
+In Python this is:
+
+\pyfile{code/x-plus-2.py}
+
+Python 3 supports ``type annotations'', where you can gently suggest a type

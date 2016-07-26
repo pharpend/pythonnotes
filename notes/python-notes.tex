@@ -1,18 +1,24 @@
 \documentclass[12pt,letterpaper,oneside]{memoir}
 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage[date=iso8601,urldate=iso8601]{biblatex}
-
+\usepackage{centernot}
 \usepackage{color}
-\usepackage{datetime}
+\usepackage{datetime2}
 \usepackage{listings}
+\usepackage{mathtools}
+\usepackage{tabu}
 \usepackage{url}
 
 % \usepackage{newtxtext}
 % \usepackage{newtxmath}
-\usepackage{beramono}
+\usepackage{FiraMono}
 \usepackage[T1]{fontenc}
 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{cleveref}
 
 \definecolor{mygreen}{rgb}{0.3,0.6,0.3}
@@ -48,12 +54,37 @@
   caption=\lstname ,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
-\yyyymmdddate
-\renewcommand*{\dateseparator}{-}
 \addbibresource{python-notes.bib}
+\nocite{*}
 
+\theoremstyle{plain}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{definition}
+\newtheorem{remark}[definition]{Remark}
+
+\newcommand{\psubof}{\subsetneqq}
+\newcommand{\subof}{\subseteq}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\braces}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\mset}[1]{\braces{\, #1 \,}}
+\newcommand{\scomp}[2]{\mset{#1 \::\: #2}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\ctext}[1]{$$\text{#1}$$}
 \newcommand{\term}{\textbf}
+\newcommand{\divides}{\mid}
 \newcommand{\code}{\lstinline}
+\newcommand{\pyfile}{\lstinputlisting[language=Python]}
+\newcommand{\dol}{\$}
+\newcommand{\lstin}[1]{\lstinputlisting{listings/#1}}
 
 % \newenvironment{pyblock}
 %   {\begin{lstlisting}[language=Python]}

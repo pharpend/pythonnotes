@@ -1,0 +1,25 @@
+$ pwd
+/home/pharpend
+$ ls
+annex
+bin
+books
+docs
+downloads
+music
+pics
+public
+src
+templates
+videos
+$ cd src/pythonnotes/notes
+$ pwd
+/home/pharpend/src/pythonnotes/notes
+$ ls
+chapters
+code
+listings
+Makefile
+python-notes.bib
+python-notes.pdf
+python-notes.tex
